@@ -48,9 +48,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void initData() {
         String password = passwordEncoder.encode("123456");
         userList = new ArrayList<>();
-        userList.add(new User("macro", password, AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN,USER,ADMIN1,USER2,ADMIN3,USER4,ADMIN5,USER6,ADMIN7,USER8,ADMIN9,USER11,ADMIN111,USER22,ADMIN222,USER33,ADMIN33,USER333,ADMIN333,USER44,ADMIN44,USER444,ADMIN444,USER55,ADMIN55,USER555,ADMIN555,USER6,ADMIN6,USER66,ADMIN66,USER666,ADMIN666,A,B,C,D,E,F,G,H")));
-        userList.add(new User("andy", password, AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN")));
-        userList.add(new User("mark", password, AuthorityUtils.commaSeparatedStringToAuthorityList("USER")));
+        userList.add(new User("macro", password, AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN,ROLE_USER,ROLE_ADMIN1,ROLE_USER2,ROLE_ADMIN3,ROLE_USER4,ROLE_ADMIN5,ROLE_USER6,ROLE_ADMIN7,ROLE_USER8,ROLE_ADMIN9,ROLE_USER11,ROLE_ADMIN111,ROLE_USER22,ROLE_ADMIN222,ROLE_USER33,ROLE_ADMIN33,ROLE_USER333,ROLE_ADMIN333,ROLE_USER44,ROLE_ADMIN44,ROLE_USER444,ROLE_ADMIN444,ROLE_USER55,ROLE_ADMIN55,ROLE_USER555,ROLE_ADMIN555,ROLE_USER6,ROLE_ADMIN6,ROLE_USER66,ROLE_ADMIN66,ROLE_USER666,ROLE_ADMIN666,ROLE_A,ROLE_B,ROLE_C,ROLE_D,ROLE_E,ROLE_F,ROLE_G,ROLE_H")));
+        userList.add(new User("andy", password, AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN")));
+        userList.add(new User("mark", password, AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER")));
+        userList.add(new User("client", passwordEncoder.encode("secret"), AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER")));
     }
 
     @Override

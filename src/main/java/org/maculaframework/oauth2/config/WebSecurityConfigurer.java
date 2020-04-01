@@ -67,12 +67,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//            User.withUsername("macro")
-//                .password(passwordEncoder().encode("123456"))
-//                .roles("USER")
-//                .build());
-
         return new CustomUserDetailsService();
     }
 }

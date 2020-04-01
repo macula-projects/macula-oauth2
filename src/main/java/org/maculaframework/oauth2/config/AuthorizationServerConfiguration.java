@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -43,6 +44,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -59,7 +62,7 @@ import java.util.stream.Collectors;
 @Configuration
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    @Value("${spring.security.oauth2.authorizationserver.jwt.enabled:true}")
+    @Value("${spring.security.oauth2.authorizationserver.jwt.enabled:false}")
     boolean jwtEnabled;
     @Value("${spring.security.oauth2.authorizationserver.jwt.secret:macula_secret$terces_alucam$123456}")
     String secret;
@@ -162,6 +165,7 @@ class IntrospectEndpoint {
         attributes.put("exp", accessToken.getExpiration().getTime());
         attributes.put("scope", accessToken.getScope().stream().collect(Collectors.joining(" ")));
         attributes.put("sub", authentication.getName());
+        attributes.put("authorities", authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
 
         return attributes;
     }

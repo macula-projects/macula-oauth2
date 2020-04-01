@@ -28,9 +28,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2020-03-19
  */
 @SpringBootApplication
-public class Oauth2Application {
+public class MaculaOauth2Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Oauth2Application.class, args);
+        SpringApplication.run(MaculaOauth2Application.class, args);
     }
 }
