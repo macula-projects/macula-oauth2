@@ -27,6 +27,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -49,11 +51,14 @@ public class CustomClientDetailsService implements ClientDetailsService {
 
         clientDetails.setClientId(clientId);
         clientDetails.setClientSecret(passwordEncoder.encode("secret"));
-        clientDetails.setAuthorizedGrantTypes(StringUtils.commaDelimitedListToSet("password,refresh_token,authorization_code"));
+        clientDetails.setAuthorizedGrantTypes(StringUtils.commaDelimitedListToSet("password,implicit,refresh_token,authorization_code"));
         clientDetails.setAccessTokenValiditySeconds(600_000_000);
         clientDetails.setRefreshTokenValiditySeconds(864_000_000);
         clientDetails.setScope(StringUtils.commaDelimitedListToSet("all"));
         clientDetails.setAuthorities(Collections.emptyList());
+        Set<String> redirectUris = new HashSet<String>();
+        redirectUris.add("http://baidu.com");
+        clientDetails.setRegisteredRedirectUri(redirectUris);
 
         return clientDetails;
     }

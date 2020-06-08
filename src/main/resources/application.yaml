@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: local
   # 应用配置
   application:
     name: macula-oauth2
@@ -25,11 +25,20 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
   redis:
     redisson:
-      config: classpath:redisson-${spring.profiles}.yaml
-
+      config: classpath:/redisson-${spring.profiles}.yaml
+  liquibase:
+    enabled: false
 server:
   port: 8081
 
+---
+spring:
+  profiles: local
+macula:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/macula-base?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password:
 ---
 spring:
   profiles: dev

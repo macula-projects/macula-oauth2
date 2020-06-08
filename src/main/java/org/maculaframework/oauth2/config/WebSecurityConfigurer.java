@@ -48,7 +48,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .anyRequest().authenticated()
             .and()
-            .httpBasic()
+            .formLogin()
+            .permitAll()
             .and()
             .csrf().ignoringRequestMatchers(request -> "/introspect".equals(request.getRequestURI()));
     }
